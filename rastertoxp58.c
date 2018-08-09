@@ -14,7 +14,6 @@
 
 #define DEBUGFILE "/tmp/debugraster.txt"
 
-typedef void (*__sighandler_t)();
 
 struct settings_
 {
@@ -86,7 +85,6 @@ inline int hi (int val)
 // enter raster mode and set up x and y dimensions
 inline void rasterheader(int xsize, int ysize)
 {
-	outputCommand(rasterModeStartCommand);
 	mputchar(lo(xsize));
 	mputchar(hi(xsize));
 	mputchar(lo(ysize));
@@ -318,6 +316,7 @@ int main(int argc, char *argv[])
 			for (;zeroy>0;--zeroy)
 				skiplines(24);
 			
+			outputCommand(rasterModeStartCommand);
 			rasterheader(width_size,rest);
 			outputarray((char*)rasterData,width_size*24);
 			skiplines(0);
